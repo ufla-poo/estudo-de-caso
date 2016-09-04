@@ -34,6 +34,8 @@ public class TelaPrincipal {
     }
 
     private final void inicializar() {
+        // Serve para o caso em que o usuário
+        // decidiu mudar o idioma da aplicação.
         if (janela != null) {
             janela.dispose();
         }
