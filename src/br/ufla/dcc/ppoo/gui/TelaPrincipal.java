@@ -34,6 +34,9 @@ public class TelaPrincipal {
     }
 
     private final void inicializar() {
+        if (janela != null) {
+            janela.dispose();
+        }
         construirTela();
         exibirTela();
     }
@@ -58,7 +61,6 @@ public class TelaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 I18N.alterarLocalidade(I18N.PT_BR);
-                janela.dispose();
                 inicializar();
             }
         });
@@ -67,7 +69,6 @@ public class TelaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 I18N.alterarLocalidade(I18N.EN_US);
-                janela.dispose();
                 inicializar();
             }
         });
@@ -114,7 +115,7 @@ public class TelaPrincipal {
         // Configura plano de fundo
         planoFundo = new JLabel(GerenciadorDeImagens.PLANO_FUNDO);
         janela.add(planoFundo);
-        
+
         construirMenuLogoff();
     }
 
