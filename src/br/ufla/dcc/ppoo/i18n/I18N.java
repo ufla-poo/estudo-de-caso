@@ -15,7 +15,7 @@ public class I18N {
         rb = ResourceBundle.getBundle(CAMINHO_ARQUIVOBASE_I18N, localidade);
     }
 
-    public static String obterNomeDaAplicacao() {
+    public static String obterNomeDoSistema() {
         return rb.getString("sistema.nome");
     }
 
@@ -55,6 +55,18 @@ public class I18N {
         return rb.getString("menu.idioma.en_us");
     }
 
+    public static String obterMenuAjuda() {
+        return rb.getString("menu.ajuda");
+    }
+
+    public static char obterMnemonicoMenuAjuda() {
+        return rb.getString("mnemonico.menu.ajuda").charAt(0);
+    }
+
+    public static String obterMenuSobre() {
+        return rb.getString("menu.ajuda.sobre");
+    }
+    
     public static String obterConfirmacaoSaida() {
         return rb.getString("confirmacao.saida.descricao");
     }
@@ -62,12 +74,50 @@ public class I18N {
     public static String obterTituloMensagemConfirmacao() {
         return rb.getString("confirmacao.titulo");
     }
+    
+    public static String obterSobre() {
+        return rb.getString("sistema.sobre");
+    }
+    
+    public static String obterTituloMensagemSobre() {
+        return rb.getString("sobre.titulo");
+    }
 
-    public static String obterTituloTelaAtenticacao() {
+    public static String obterTituloTelaAutenticacao() {
         return rb.getString("tela.autenticacao.titulo");
     }
 
     public static String obterTituloTelaPrincipal() {
-        return obterNomeDaAplicacao();
+        return obterNomeDoSistema();
     }
+
+    public static String obterRotuloUsuario() {
+        return rb.getString("rotulo.usuario");
+    }
+
+    public static String obterRotuloSenha() {
+        return rb.getString("rotulo.senha");
+    }
+
+    public static String obterBotaoEntrar() {
+        return rb.getString("botao.entrar");
+    }
+
+    public static String obterBotaoCancelar() {
+        return rb.getString("botao.cancelar");
+    }
+    
+    public static String obterBotaoSalvar() {
+        return rb.getString("botao.salvar");
+    }
+
+    public static String obterRotuloNome() {
+        return rb.getString("rotulo.nome");
+    }
+
+    public static String obterRotuloConfirmarSenha() {
+        return rb.getString("rotulo.confirmar_senha");
+    }
+
+    
 }

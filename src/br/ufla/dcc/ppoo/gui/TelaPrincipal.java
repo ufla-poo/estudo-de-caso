@@ -20,12 +20,14 @@ public class TelaPrincipal {
     private JMenuBar menuPrincipal;
     private JMenu menuInicio;
     private JMenu menuIdioma;
+    private JMenu menuAjuda;
 
     private JMenuItem menuEntrar;
     private JMenuItem menuCadastrarUsuario;
     private JMenuItem menuIdiomaPortugues;
     private JMenuItem menuIdiomaIngles;
     private JMenuItem menuSair;
+    private JMenuItem menuSobre;
 
     private JLabel planoFundo;
 
@@ -42,19 +44,24 @@ public class TelaPrincipal {
         construirTela();
     }
 
-    private void confirmarSaida() {
+    private boolean confirmarSaida() {
         final int op = JOptionPane.showConfirmDialog(janela, I18N.obterConfirmacaoSaida(),
                 I18N.obterTituloMensagemConfirmacao(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (op == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
+        return op == JOptionPane.YES_OPTION;
+    }
+
+    private void exibirInfoSobreSistema() {
+        JOptionPane.showMessageDialog(janela, I18N.obterSobre(),
+                I18N.obterTituloMensagemSobre(), JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void configurarAcoesMenu() {
         menuSair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                confirmarSaida();
+                if (confirmarSaida()) {
+                    System.exit(0);
+                }
             }
         });
 
@@ -75,11 +82,25 @@ public class TelaPrincipal {
                 exibirTela();
             }
         });
-        
+
         menuEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new TelaAutenticacao().exibirTela(janela);
+            }
+        });
+
+        menuCadastrarUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TelaCadastroUsuario().exibirTela(janela);
+            }
+        });
+
+        menuSobre.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exibirInfoSobreSistema();
             }
         });
     }
@@ -97,6 +118,10 @@ public class TelaPrincipal {
         menuIdiomaPortugues = new JMenuItem(I18N.obterMenuIdiomaPortugues(), GerenciadorDeImagens.BANDEIRA_BR);
         menuIdiomaIngles = new JMenuItem(I18N.obterMenuIdiomaIngles(), GerenciadorDeImagens.BANDEIRA_GB);
 
+        menuAjuda = new JMenu(I18N.obterMenuAjuda());
+        menuAjuda.setMnemonic(I18N.obterMnemonicoMenuAjuda());
+        menuSobre = new JMenuItem(I18N.obterMenuSobre(), GerenciadorDeImagens.SOBRE);
+
         menuInicio.add(menuEntrar);
         menuInicio.add(menuCadastrarUsuario);
         menuInicio.addSeparator();
@@ -105,8 +130,12 @@ public class TelaPrincipal {
         menuIdioma.add(menuIdiomaPortugues);
         menuIdioma.add(menuIdiomaIngles);
 
+        menuAjuda.add(menuSobre);
+
         menuPrincipal.add(menuInicio);
         menuPrincipal.add(menuIdioma);
+        menuPrincipal.add(menuAjuda);
+
         janela.setJMenuBar(menuPrincipal);
 
         configurarAcoesMenu();
@@ -114,11 +143,13 @@ public class TelaPrincipal {
 
     private final void construirTela() {
         janela = new JFrame(I18N.obterTituloTelaPrincipal());
-        janela.setTitle(I18N.obterNomeDaAplicacao());
+        janela.setTitle(I18N.obterNomeDoSistema());
         janela.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                confirmarSaida();
+                if (confirmarSaida()) {
+                    System.exit(0);
+                }
             }
         });
 

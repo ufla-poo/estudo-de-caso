@@ -16,19 +16,23 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class TelaAutenticacao {
+public class TelaCadastroUsuario {
 
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
+    private JLabel lbNome;
     private JLabel lbUsuario;
     private JLabel lbSenha;
+    private JLabel lbConfirmarSenha;
+    private JTextField txtNome;
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
-    private JButton btnEntrar;
+    private JPasswordField txtConfirmarSenha;
+    private JButton btnSalvar;
     private JButton btnCancelar;
 
-    public TelaAutenticacao() {
+    public TelaCadastroUsuario() {
         construirTela();
     }
 
@@ -47,47 +51,70 @@ public class TelaAutenticacao {
     }
 
     private void adicionarComponentes() {
+        lbNome = new JLabel(I18N.obterRotuloNome());
+        adicionarComponente(lbNome,
+                GridBagConstraints.LINE_END,
+                GridBagConstraints.NONE,
+                0, 0, 1, 1);
+
         lbUsuario = new JLabel(I18N.obterRotuloUsuario());
         adicionarComponente(lbUsuario,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
-                0, 0, 1, 1);
+                1, 0, 1, 1);
 
         lbSenha = new JLabel(I18N.obterRotuloSenha());
         adicionarComponente(lbSenha,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
-                1, 0, 1, 1);
+                2, 0, 1, 1);
+        
+        lbConfirmarSenha = new JLabel(I18N.obterRotuloConfirmarSenha());
+        adicionarComponente(lbConfirmarSenha,
+                GridBagConstraints.LINE_END,
+                GridBagConstraints.NONE,
+                3, 0, 1, 1);
 
-        txtUsuario = new JTextField(25);
-        adicionarComponente(txtUsuario,
+        txtNome = new JTextField(35);
+        adicionarComponente(txtNome,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 0, 1, 1, 1);
         
+        txtUsuario = new JTextField(25);
+        adicionarComponente(txtUsuario,
+                GridBagConstraints.LINE_START,
+                GridBagConstraints.NONE,
+                1, 1, 1, 1);
+
         txtSenha = new JPasswordField(10);
         adicionarComponente(txtSenha,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
-                1, 1, 1, 1);
+                2, 1, 1, 1);
         
-                
-        btnEntrar = new JButton(I18N.obterBotaoEntrar(), 
+        txtConfirmarSenha = new JPasswordField(10);
+        adicionarComponente(txtConfirmarSenha,
+                GridBagConstraints.LINE_START,
+                GridBagConstraints.NONE,
+                3, 1, 1, 1);
+
+        btnSalvar = new JButton(I18N.obterBotaoSalvar(),
                 GerenciadorDeImagens.OK);
-        
-        btnCancelar = new JButton(I18N.obterBotaoCancelar(), 
+
+        btnCancelar = new JButton(I18N.obterBotaoCancelar(),
                 GerenciadorDeImagens.CANCELAR);
-        
+
         JPanel painelBotoes = new JPanel();
-        painelBotoes.add(btnEntrar);
+        painelBotoes.add(btnSalvar);
         painelBotoes.add(btnCancelar);
-        
+
         adicionarComponente(painelBotoes,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
-                2, 0, 2, 1);
+                4, 0, 2, 1);
     }
-    
+
     private void configurarAcoesBotoes() {
         btnCancelar.addActionListener(new ActionListener() {
             @Override
