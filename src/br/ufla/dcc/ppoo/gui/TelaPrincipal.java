@@ -33,17 +33,16 @@ public class TelaPrincipal {
         inicializar();
     }
 
-    private final void inicializar() {
+    private void inicializar() {
         // Serve para o caso em que o usuário
         // decidiu mudar o idioma da aplicação.
         if (janela != null) {
             janela.dispose();
         }
         construirTela();
-        exibirTela();
     }
 
-    private final void confirmarSaida() {
+    private void confirmarSaida() {
         final int op = JOptionPane.showConfirmDialog(janela, I18N.obterConfirmacaoSaida(),
                 I18N.obterTituloMensagemConfirmacao(), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (op == JOptionPane.YES_OPTION) {
@@ -51,7 +50,7 @@ public class TelaPrincipal {
         }
     }
 
-    private final void configurarAcoesMenu() {
+    private void configurarAcoesMenu() {
         menuSair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,6 +63,7 @@ public class TelaPrincipal {
             public void actionPerformed(ActionEvent e) {
                 I18N.alterarLocalidade(I18N.PT_BR);
                 inicializar();
+                exibirTela();
             }
         });
 
@@ -72,11 +72,19 @@ public class TelaPrincipal {
             public void actionPerformed(ActionEvent e) {
                 I18N.alterarLocalidade(I18N.EN_US);
                 inicializar();
+                exibirTela();
+            }
+        });
+        
+        menuEntrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TelaAutenticacao().exibirTela(janela);
             }
         });
     }
 
-    private final void construirMenuLogoff() {
+    private final void construirMenuUsuarioNaoAutenticado() {
         menuPrincipal = new JMenuBar();
         menuInicio = new JMenu(I18N.obterMenuInicio());
         menuInicio.setMnemonic(I18N.obterMnemonicoMenuInicio());
@@ -105,7 +113,7 @@ public class TelaPrincipal {
     }
 
     private final void construirTela() {
-        janela = new JFrame(I18N.obterNomeDaAplicacao());
+        janela = new JFrame(I18N.obterTituloTelaPrincipal());
         janela.setTitle(I18N.obterNomeDaAplicacao());
         janela.addWindowListener(new WindowAdapter() {
             @Override
@@ -118,10 +126,10 @@ public class TelaPrincipal {
         planoFundo = new JLabel(GerenciadorDeImagens.PLANO_FUNDO);
         janela.add(planoFundo);
 
-        construirMenuLogoff();
+        construirMenuUsuarioNaoAutenticado();
     }
 
-    private final void exibirTela() {
+    private void exibirTela() {
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         janela.setExtendedState(JFrame.MAXIMIZED_BOTH);
         janela.setVisible(true);
@@ -129,7 +137,7 @@ public class TelaPrincipal {
     }
 
     public static void main(String[] args) {
-        new TelaPrincipal();
+        new TelaPrincipal().exibirTela();
     }
 
 }
