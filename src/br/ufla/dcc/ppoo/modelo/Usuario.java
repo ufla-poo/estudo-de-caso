@@ -17,7 +17,27 @@ public class Usuario {
         this.nome = nome;
     }
     
-    public boolean validarUsuario(String login, char[] senha) {
-        return (this.login.equals(login) && Arrays.equals(this.senha, senha));
+    public Usuario(String login, char[] senha) {
+        this.login = login;
+        this.senha = Arrays.copyOf(senha, senha.length);
+        this.nome = "";
     }
+    
+    public boolean checarSenha(char[] senha) {
+        return (Arrays.equals(this.senha, senha));
+    }
+
+    public String obterLogin() {
+        return login;
+    }
+
+    public char[] obterSenha() {
+        return senha;
+    }
+
+    public String obterNome() {
+        return nome;
+    }
+    
+    
 }

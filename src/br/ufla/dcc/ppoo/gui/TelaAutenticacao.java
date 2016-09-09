@@ -4,6 +4,7 @@ import br.ufla.dcc.ppoo.i18n.I18N;
 import br.ufla.dcc.ppoo.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.modelo.Usuario;
 import br.ufla.dcc.ppoo.seguranca.SessaoUsuario;
+import br.ufla.dcc.ppoo.servicos.GerenciadorUsuarios;
 import br.ufla.dcc.ppoo.util.Utilidades;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -23,6 +24,7 @@ public class TelaAutenticacao {
 
     private final SessaoUsuario sessaoUsuario;
     private final TelaPrincipal telaPrincipal;
+
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
@@ -36,9 +38,8 @@ public class TelaAutenticacao {
     public TelaAutenticacao(TelaPrincipal telaPrincipal) {
         this.telaPrincipal = telaPrincipal;
         this.sessaoUsuario = SessaoUsuario.obterInstancia();
-        
     }
-    
+
     public void inicializar() {
         construirTela();
         configurarEventosTela();
@@ -100,17 +101,22 @@ public class TelaAutenticacao {
                 2, 0, 2, 1);
     }
 
+    private Usuario carregarUsuario() {
+        return new Usuario(txtUsuario.getText(),
+                txtSenha.getPassword());
+    }
+
     private void configurarEventosTela() {
         btnEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                char[] senha = new char[]{'1', '2', '3'};
-                Usuario u = new Usuario("teste", senha, "teste");
-                sessaoUsuario.alterarUsuario(u);
-                telaPrincipal.inicializar();
-                janela.dispose();
-                
-                // Utilidades.msgErro(I18N.obterErroAutenticacao());
+                try {
+                    GerenciadorUsuarios.autenticarUsuario(carregarUsuario());
+                    telaPrincipal.inicializar();
+                    janela.dispose();
+                } catch (Exception ex) {
+                    Utilidades.msgErro(ex.getMessage());
+                }
             }
         });
 

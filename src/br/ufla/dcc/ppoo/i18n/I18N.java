@@ -74,9 +74,21 @@ public class I18N {
     public static String obterConfirmacaoSaida() {
         return rb.getString("confirmacao.saida.descricao");
     }
-    
+
     public static String obterErroAutenticacao() {
-        return rb.getString("erro.autenticacao.descricao");
+        return rb.getString("erro.usuario.autenticacao");
+    }
+
+    public static String obterErroUsuarioJaCadastrado() {
+        return rb.getString("erro.usuario.ja_cadastrado");
+    }
+
+    public static String obterErroSenhasNaoConferem() {
+        return rb.getString("erro.usuario.senhas_nao_conferem");
+    }
+    
+    public static String obterSucessoCadastroUsuario() {
+        return rb.getString("sucesso.usuario.cadastro");
     }
 
     public static String obterTituloMensagemConfirmacao() {
@@ -130,7 +142,5 @@ public class I18N {
     public static String obterRotuloConfirmarSenha() {
         return rb.getString("rotulo.confirmar_senha");
     }
-
-    
 
 }

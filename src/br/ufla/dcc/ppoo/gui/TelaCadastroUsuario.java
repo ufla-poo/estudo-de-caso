@@ -1,13 +1,19 @@
 package br.ufla.dcc.ppoo.gui;
 
+import br.ufla.dcc.ppoo.dao.UsuarioDAO;
+import br.ufla.dcc.ppoo.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.ppoo.i18n.I18N;
 import br.ufla.dcc.ppoo.imagens.GerenciadorDeImagens;
+import br.ufla.dcc.ppoo.modelo.Usuario;
+import br.ufla.dcc.ppoo.servicos.GerenciadorUsuarios;
+import br.ufla.dcc.ppoo.util.Utilidades;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -17,6 +23,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class TelaCadastroUsuario {
+
+    private UsuarioDAO repositorioUsuario;
 
     private JDialog janela;
     private GridBagLayout layout;
@@ -33,6 +41,7 @@ public class TelaCadastroUsuario {
     private JButton btnCancelar;
 
     public TelaCadastroUsuario() {
+        this.repositorioUsuario = UsuarioDAOLista.obterInstancia();
         construirTela();
     }
 
@@ -68,7 +77,7 @@ public class TelaCadastroUsuario {
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
                 2, 0, 1, 1);
-        
+
         lbConfirmarSenha = new JLabel(I18N.obterRotuloConfirmarSenha());
         adicionarComponente(lbConfirmarSenha,
                 GridBagConstraints.LINE_END,
@@ -80,7 +89,7 @@ public class TelaCadastroUsuario {
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 0, 1, 1, 1);
-        
+
         txtUsuario = new JTextField(25);
         adicionarComponente(txtUsuario,
                 GridBagConstraints.LINE_START,
@@ -92,7 +101,7 @@ public class TelaCadastroUsuario {
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 2, 1, 1, 1);
-        
+
         txtConfirmarSenha = new JPasswordField(10);
         adicionarComponente(txtConfirmarSenha,
                 GridBagConstraints.LINE_START,
@@ -115,6 +124,20 @@ public class TelaCadastroUsuario {
                 4, 0, 2, 1);
     }
 
+    private Usuario carregarUsuario() {
+        return new Usuario(txtUsuario.getText(),
+                txtSenha.getPassword(),
+                txtNome.getText());
+    }
+    
+    private void limparTela() {
+        txtNome.setText("");
+        txtUsuario.setText("");
+        txtSenha.setText("");
+        txtConfirmarSenha.setText("");
+        txtNome.requestFocus();
+    }
+
     private void configurarAcoesBotoes() {
         btnCancelar.addActionListener(new ActionListener() {
             @Override
@@ -122,6 +145,26 @@ public class TelaCadastroUsuario {
                 janela.dispose();
             }
         });
+
+        btnSalvar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!Arrays.equals(txtSenha.getPassword(),
+                            txtConfirmarSenha.getPassword())) {
+                        throw new Exception(I18N.obterErroSenhasNaoConferem());
+                    }
+
+                    GerenciadorUsuarios.cadastrarUsuario(carregarUsuario());
+                    Utilidades.msgInformacao(I18N.obterSucessoCadastroUsuario());
+                    limparTela();
+                } catch (Exception ex) {
+                    Utilidades.msgErro(ex.getMessage());
+                }
+
+            }
+        });
+
     }
 
     private void construirTela() {
@@ -142,5 +185,4 @@ public class TelaCadastroUsuario {
         janela.setVisible(true);
         janela.setResizable(false);
     }
-
 }
