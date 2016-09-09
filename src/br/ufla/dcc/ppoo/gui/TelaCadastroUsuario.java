@@ -129,7 +129,7 @@ public class TelaCadastroUsuario {
                 txtSenha.getPassword(),
                 txtNome.getText());
     }
-    
+
     private void limparTela() {
         txtNome.setText("");
         txtLogin.setText("");
@@ -183,6 +183,6 @@ public class TelaCadastroUsuario {
         janela.setLocationRelativeTo(janela);
         janela.setModal(true);
         janela.setVisible(true);
-        janela.setResizable(false);
+        janela.setResizable(false);        
     }
 }
