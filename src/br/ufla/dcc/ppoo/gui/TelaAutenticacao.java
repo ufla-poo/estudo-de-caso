@@ -2,6 +2,9 @@ package br.ufla.dcc.ppoo.gui;
 
 import br.ufla.dcc.ppoo.i18n.I18N;
 import br.ufla.dcc.ppoo.imagens.GerenciadorDeImagens;
+import br.ufla.dcc.ppoo.modelo.Usuario;
+import br.ufla.dcc.ppoo.seguranca.SessaoUsuario;
+import br.ufla.dcc.ppoo.util.Utilidades;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +21,8 @@ import javax.swing.JTextField;
 
 public class TelaAutenticacao {
 
+    private final SessaoUsuario sessaoUsuario;
+    private final TelaPrincipal telaPrincipal;
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
@@ -28,8 +33,16 @@ public class TelaAutenticacao {
     private JButton btnEntrar;
     private JButton btnCancelar;
 
-    public TelaAutenticacao() {
+    public TelaAutenticacao(TelaPrincipal telaPrincipal) {
+        this.telaPrincipal = telaPrincipal;
+        this.sessaoUsuario = SessaoUsuario.obterInstancia();
+        
+    }
+    
+    public void inicializar() {
         construirTela();
+        configurarEventosTela();
+        exibirTela();
     }
 
     private void adicionarComponente(Component c,
@@ -64,31 +77,43 @@ public class TelaAutenticacao {
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 0, 1, 1, 1);
-        
+
         txtSenha = new JPasswordField(10);
         adicionarComponente(txtSenha,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 1, 1, 1, 1);
-        
-                
-        btnEntrar = new JButton(I18N.obterBotaoEntrar(), 
+
+        btnEntrar = new JButton(I18N.obterBotaoEntrar(),
                 GerenciadorDeImagens.OK);
-        
-        btnCancelar = new JButton(I18N.obterBotaoCancelar(), 
+
+        btnCancelar = new JButton(I18N.obterBotaoCancelar(),
                 GerenciadorDeImagens.CANCELAR);
-        
+
         JPanel painelBotoes = new JPanel();
         painelBotoes.add(btnEntrar);
         painelBotoes.add(btnCancelar);
-        
+
         adicionarComponente(painelBotoes,
                 GridBagConstraints.CENTER,
                 GridBagConstraints.NONE,
                 2, 0, 2, 1);
     }
-    
-    private void configurarAcoesBotoes() {
+
+    private void configurarEventosTela() {
+        btnEntrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                char[] senha = new char[]{'1', '2', '3'};
+                Usuario u = new Usuario("teste", senha, "teste");
+                sessaoUsuario.alterarUsuario(u);
+                telaPrincipal.inicializar();
+                janela.dispose();
+                
+                // Utilidades.msgErro(I18N.obterErroAutenticacao());
+            }
+        });
+
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,16 +129,14 @@ public class TelaAutenticacao {
         gbc = new GridBagConstraints();
         janela.setLayout(layout);
         adicionarComponentes();
-        configurarAcoesBotoes();
         janela.pack();
     }
 
-    public void exibirTela(JFrame janelaPai) {
+    private void exibirTela() {
         janela.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        janela.setLocationRelativeTo(janela);
+        janela.setLocationRelativeTo(telaPrincipal.obterJanela());
         janela.setModal(true);
         janela.setVisible(true);
         janela.setResizable(false);
     }
-
 }

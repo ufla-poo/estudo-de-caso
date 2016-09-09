@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 public class GerenciadorDeImagens {
 
     public static final ImageIcon SAIR = carregarIcone("sair.png");
+    public static final ImageIcon LOGOUT = carregarIcone("logout.png");
     public static final ImageIcon ENTRAR = carregarIcone("entrar.png");
     public static final ImageIcon BANDEIRA_BR = carregarIcone("bandeira-br.png");
     public static final ImageIcon BANDEIRA_GB = carregarIcone("bandeira-gb.png");

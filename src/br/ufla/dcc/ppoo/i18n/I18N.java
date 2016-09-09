@@ -39,6 +39,10 @@ public class I18N {
         return rb.getString("menu.inicio.sair");
     }
 
+    public static String obterMenuLogout() {
+        return rb.getString("menu.inicio.logout");
+    }
+
     public static String obterMenuIdioma() {
         return rb.getString("menu.idioma");
     }
@@ -66,21 +70,29 @@ public class I18N {
     public static String obterMenuSobre() {
         return rb.getString("menu.ajuda.sobre");
     }
-    
+
     public static String obterConfirmacaoSaida() {
         return rb.getString("confirmacao.saida.descricao");
+    }
+    
+    public static String obterErroAutenticacao() {
+        return rb.getString("erro.autenticacao.descricao");
     }
 
     public static String obterTituloMensagemConfirmacao() {
         return rb.getString("confirmacao.titulo");
     }
-    
-    public static String obterSobre() {
+
+    public static String obterMensagemSobre() {
         return rb.getString("sistema.sobre");
     }
-    
-    public static String obterTituloMensagemSobre() {
-        return rb.getString("sobre.titulo");
+
+    public static String obterTituloMensagemInformacao() {
+        return rb.getString("informacao.titulo");
+    }
+
+    public static String obterTituloMensagemErro() {
+        return rb.getString("erro.titulo");
     }
 
     public static String obterTituloTelaAutenticacao() {
@@ -106,7 +118,7 @@ public class I18N {
     public static String obterBotaoCancelar() {
         return rb.getString("botao.cancelar");
     }
-    
+
     public static String obterBotaoSalvar() {
         return rb.getString("botao.salvar");
     }
@@ -120,4 +132,5 @@ public class I18N {
     }
 
     
+
 }

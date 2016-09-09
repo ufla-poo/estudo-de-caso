@@ -16,4 +16,8 @@ public class Usuario {
         this.senha = Arrays.copyOf(senha, senha.length);
         this.nome = nome;
     }
+    
+    public boolean validarUsuario(String login, char[] senha) {
+        return (this.login.equals(login) && Arrays.equals(this.senha, senha));
+    }
 }
