@@ -30,11 +30,11 @@ public class TelaCadastroUsuario {
     private GridBagLayout layout;
     private GridBagConstraints gbc;
     private JLabel lbNome;
-    private JLabel lbUsuario;
+    private JLabel lbLogin;
     private JLabel lbSenha;
     private JLabel lbConfirmarSenha;
     private JTextField txtNome;
-    private JTextField txtUsuario;
+    private JTextField txtLogin;
     private JPasswordField txtSenha;
     private JPasswordField txtConfirmarSenha;
     private JButton btnSalvar;
@@ -66,8 +66,8 @@ public class TelaCadastroUsuario {
                 GridBagConstraints.NONE,
                 0, 0, 1, 1);
 
-        lbUsuario = new JLabel(I18N.obterRotuloUsuario());
-        adicionarComponente(lbUsuario,
+        lbLogin = new JLabel(I18N.obterRotuloUsuario());
+        adicionarComponente(lbLogin,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
                 1, 0, 1, 1);
@@ -90,8 +90,8 @@ public class TelaCadastroUsuario {
                 GridBagConstraints.NONE,
                 0, 1, 1, 1);
 
-        txtUsuario = new JTextField(25);
-        adicionarComponente(txtUsuario,
+        txtLogin = new JTextField(25);
+        adicionarComponente(txtLogin,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 1, 1, 1, 1);
@@ -125,14 +125,14 @@ public class TelaCadastroUsuario {
     }
 
     private Usuario carregarUsuario() {
-        return new Usuario(txtUsuario.getText(),
+        return new Usuario(txtLogin.getText(),
                 txtSenha.getPassword(),
                 txtNome.getText());
     }
     
     private void limparTela() {
         txtNome.setText("");
-        txtUsuario.setText("");
+        txtLogin.setText("");
         txtSenha.setText("");
         txtConfirmarSenha.setText("");
         txtNome.requestFocus();

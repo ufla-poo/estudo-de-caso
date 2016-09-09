@@ -28,9 +28,9 @@ public class TelaAutenticacao {
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
-    private JLabel lbUsuario;
+    private JLabel lbLogin;
     private JLabel lbSenha;
-    private JTextField txtUsuario;
+    private JTextField txtLogin;
     private JPasswordField txtSenha;
     private JButton btnEntrar;
     private JButton btnCancelar;
@@ -61,8 +61,8 @@ public class TelaAutenticacao {
     }
 
     private void adicionarComponentes() {
-        lbUsuario = new JLabel(I18N.obterRotuloUsuario());
-        adicionarComponente(lbUsuario,
+        lbLogin = new JLabel(I18N.obterRotuloUsuario());
+        adicionarComponente(lbLogin,
                 GridBagConstraints.LINE_END,
                 GridBagConstraints.NONE,
                 0, 0, 1, 1);
@@ -73,8 +73,8 @@ public class TelaAutenticacao {
                 GridBagConstraints.NONE,
                 1, 0, 1, 1);
 
-        txtUsuario = new JTextField(25);
-        adicionarComponente(txtUsuario,
+        txtLogin = new JTextField(25);
+        adicionarComponente(txtLogin,
                 GridBagConstraints.LINE_START,
                 GridBagConstraints.NONE,
                 0, 1, 1, 1);
@@ -102,7 +102,7 @@ public class TelaAutenticacao {
     }
 
     private Usuario carregarUsuario() {
-        return new Usuario(txtUsuario.getText(),
+        return new Usuario(txtLogin.getText(),
                 txtSenha.getPassword());
     }
 
