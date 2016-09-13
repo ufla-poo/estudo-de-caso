@@ -4,7 +4,7 @@ import br.ufla.dcc.ppoo.modelo.Usuario;
 
 public class SessaoUsuario {
     private static SessaoUsuario instancia;
-    private static Usuario usuario;
+    private Usuario usuario;
     
     private SessaoUsuario() {}
     

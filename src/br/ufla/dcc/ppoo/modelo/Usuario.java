@@ -1,7 +1,6 @@
 package br.ufla.dcc.ppoo.modelo;
 
 import java.util.Arrays;
-import javax.swing.JPasswordField;
 
 /**
  * Representa um usuário do sistema.

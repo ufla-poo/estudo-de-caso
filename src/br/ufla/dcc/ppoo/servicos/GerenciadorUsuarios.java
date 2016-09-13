@@ -8,9 +8,9 @@ import br.ufla.dcc.ppoo.seguranca.SessaoUsuario;
 
 public class GerenciadorUsuarios {
 
-    private static UsuarioDAO repositorioUsuario
+    private static final UsuarioDAO repositorioUsuario
             = UsuarioDAOLista.obterInstancia();
-    private static SessaoUsuario sessaoUsuario
+    private static final SessaoUsuario sessaoUsuario
             = SessaoUsuario.obterInstancia();
 
     public static void autenticarUsuario(Usuario u) throws Exception {

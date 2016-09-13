@@ -1,7 +1,5 @@
 package br.ufla.dcc.ppoo.gui;
 
-import br.ufla.dcc.ppoo.dao.UsuarioDAO;
-import br.ufla.dcc.ppoo.dao.lista.UsuarioDAOLista;
 import br.ufla.dcc.ppoo.i18n.I18N;
 import br.ufla.dcc.ppoo.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.modelo.Usuario;
@@ -24,8 +22,6 @@ import javax.swing.JTextField;
 
 public class TelaCadastroUsuario {
 
-    private UsuarioDAO repositorioUsuario;
-
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
@@ -41,7 +37,6 @@ public class TelaCadastroUsuario {
     private JButton btnCancelar;
 
     public TelaCadastroUsuario() {
-        this.repositorioUsuario = UsuarioDAOLista.obterInstancia();
         construirTela();
     }
 

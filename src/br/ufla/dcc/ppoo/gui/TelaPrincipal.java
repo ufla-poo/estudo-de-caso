@@ -4,13 +4,11 @@ import br.ufla.dcc.ppoo.i18n.I18N;
 import br.ufla.dcc.ppoo.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.seguranca.SessaoUsuario;
 import br.ufla.dcc.ppoo.util.Utilidades;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -18,8 +16,8 @@ import javax.swing.JMenuItem;
 public class TelaPrincipal {
 
     private final SessaoUsuario sessaoUsuario;
+    private final TelaAutenticacao telaAutenticacao;
     private JFrame janela;
-    private TelaAutenticacao telaAutenticacao;
 
     private JMenuBar menuPrincipal;
     private JMenu menuInicio;
@@ -126,8 +124,13 @@ public class TelaPrincipal {
             menuInicio.add(menuEntrar);
             menuInicio.add(menuCadastrarUsuario);
         } else {
+            // Aqui você poderá adicionar outros menus adequados
+            // ao seu projeto que serão exibidos quando o
+            // usuário estiver logado no sistema.
+
             menuInicio.add(menuLogout);
         }
+
         menuSair = new JMenuItem(I18N.obterMenuSair(), GerenciadorDeImagens.SAIR);
         menuInicio.addSeparator();
         menuInicio.add(menuSair);
@@ -155,6 +158,13 @@ public class TelaPrincipal {
     private void construirMenuUsuario() {
         menuPrincipal = new JMenuBar();
         construirMenuInicio();
+
+        if (sessaoUsuario.estahLogado()) {
+            // Aqui você poderá adicionar outros menus adequados
+            // ao seu projeto que serão exibidos quando o
+            // usuário estiver logado no sistema.
+        }
+
         construirMenuIdioma();
         construirMenuAjuda();
         janela.setJMenuBar(menuPrincipal);
