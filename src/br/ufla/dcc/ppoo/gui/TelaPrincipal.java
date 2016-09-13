@@ -4,6 +4,7 @@ import br.ufla.dcc.ppoo.i18n.I18N;
 import br.ufla.dcc.ppoo.imagens.GerenciadorDeImagens;
 import br.ufla.dcc.ppoo.seguranca.SessaoUsuario;
 import br.ufla.dcc.ppoo.util.Utilidades;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -32,8 +33,6 @@ public class TelaPrincipal {
     private JMenuItem menuSair;
     private JMenuItem menuLogout;
     private JMenuItem menuSobre;
-
-    private JLabel planoFundo;
 
     public TelaPrincipal() {
         telaAutenticacao = new TelaAutenticacao(this);
@@ -105,6 +104,15 @@ public class TelaPrincipal {
                 Utilidades.msgInformacao(I18N.obterMensagemSobre());
             }
         });
+
+        janela.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (Utilidades.msgConfirmacao(I18N.obterConfirmacaoSaida())) {
+                    System.exit(0);
+                }
+            }
+        });
     }
 
     private void construirMenuInicio() {
@@ -152,41 +160,9 @@ public class TelaPrincipal {
         janela.setJMenuBar(menuPrincipal);
     }
 
-    private void construirMenuUsuarioAutenticado() {
-        menuPrincipal = new JMenuBar();
-        menuInicio = new JMenu(I18N.obterMenuInicio());
-        menuInicio.setMnemonic(I18N.obterMnemonicoMenuInicio());
-        menuLogout = new JMenuItem(I18N.obterMenuLogout(), GerenciadorDeImagens.ENTRAR);
-        menuSair = new JMenuItem(I18N.obterMenuSair(), GerenciadorDeImagens.SAIR);
-
-        // Coloque aqui o menu adequado
-        // ao seu projeto.
-        menuInicio.add(menuLogout);
-        menuInicio.addSeparator();
-        menuInicio.add(menuSair);
-
-        menuPrincipal.add(menuInicio);
-        menuPrincipal.add(menuAjuda);
-
-        janela.setJMenuBar(menuPrincipal);
-    }
-
     private void construirTela() {
         janela = new JFrame(I18N.obterTituloTelaPrincipal());
         janela.setTitle(I18N.obterNomeDoSistema());
-        janela.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (Utilidades.msgConfirmacao(I18N.obterConfirmacaoSaida())) {
-                    System.exit(0);
-                }
-            }
-        });
-
-        // Configura plano de fundo
-        planoFundo = new JLabel(GerenciadorDeImagens.PLANO_FUNDO);
-        janela.add(planoFundo);
-
         construirMenuUsuario();
     }
 
