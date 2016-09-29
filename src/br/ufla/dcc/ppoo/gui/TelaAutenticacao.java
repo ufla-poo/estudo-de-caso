@@ -22,7 +22,8 @@ import javax.swing.JTextField;
 public class TelaAutenticacao {
 
     private final TelaPrincipal telaPrincipal;
-
+    private final GerenciadorUsuarios gerenciadorUsuarios;
+            
     private JDialog janela;
     private GridBagLayout layout;
     private GridBagConstraints gbc;
@@ -34,6 +35,7 @@ public class TelaAutenticacao {
     private JButton btnCancelar;
 
     public TelaAutenticacao(TelaPrincipal telaPrincipal) {
+        this.gerenciadorUsuarios = new GerenciadorUsuarios();
         this.telaPrincipal = telaPrincipal;
     }
 
@@ -108,7 +110,7 @@ public class TelaAutenticacao {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    GerenciadorUsuarios.autenticarUsuario(carregarUsuario());
+                    gerenciadorUsuarios.autenticarUsuario(carregarUsuario());
                     telaPrincipal.inicializar();
                     janela.dispose();
                 } catch (Exception ex) {
