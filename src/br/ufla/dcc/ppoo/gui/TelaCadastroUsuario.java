@@ -174,7 +174,7 @@ public class TelaCadastroUsuario {
 
     private void construirTela() {
         janela = new JDialog();
-        janela.setTitle(I18N.obterTituloTelaAutenticacao());
+        janela.setTitle(I18N.obterTituloTelaCadastrarUsuario());
         layout = new GridBagLayout();
         gbc = new GridBagConstraints();
         janela.setLayout(layout);

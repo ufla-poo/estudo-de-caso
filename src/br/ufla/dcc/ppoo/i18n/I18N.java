@@ -110,6 +110,10 @@ public class I18N {
     public static String obterTituloTelaAutenticacao() {
         return rb.getString("tela.autenticacao.titulo");
     }
+    
+    public static String obterTituloTelaCadastrarUsuario() {
+        return rb.getString("tela.cadastrousuario.titulo");
+    }
 
     public static String obterTituloTelaPrincipal() {
         return obterNomeDoSistema();
