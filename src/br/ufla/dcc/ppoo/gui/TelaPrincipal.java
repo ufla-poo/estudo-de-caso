@@ -14,32 +14,52 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRootPane;
 
+/**
+ * Classe que representa a Tela Principal
+ *
+ * @author Julio
+ */
 public class TelaPrincipal {
 
+    // objeto de controle de sessão (autenticação) do usuário
     private final SessaoUsuario sessaoUsuario;
+    // tela de autenticação (login) de usuário
     private final TelaAutenticacao telaAutenticacao;
+    // tela de cadastro de usuário
     private final TelaCadastroUsuario telaCadastroUsuario;
+
+    // janela da tela principal
     private JFrame janela;
 
+    // Menus principais da tela    
     private JMenuBar menuPrincipal;
     private JMenu menuInicio;
     private JMenu menuIdioma;
     private JMenu menuAjuda;
 
+    // Submenus da tela
     private JMenuItem menuEntrar;
     private JMenuItem menuCadastrarUsuario;
     private JMenuItem menuIdiomaPortugues;
     private JMenuItem menuIdiomaIngles;
     private JMenuItem menuSair;
-    private JMenuItem menuLogout;
     private JMenuItem menuSobre;
 
+    // Itens de menu específicos para usuários logados no sistema    
+    private JMenuItem menuLogout;
+
+    /**
+     * Construtor; incializa as demais telas e sessão de usuário.
+     */
     public TelaPrincipal() {
         telaAutenticacao = new TelaAutenticacao(this);
         telaCadastroUsuario = new TelaCadastroUsuario(this);
         sessaoUsuario = SessaoUsuario.obterInstancia();
     }
 
+    /**
+     * Inicializa a tela
+     */
     public void inicializar() {
         // Serve para o caso em que o usuário
         // decidiu mudar o idioma da aplicação.
@@ -51,6 +71,9 @@ public class TelaPrincipal {
         exibirTela();
     }
 
+    /**
+     * Configura os eventos da tela.
+     */
     private void configurarEventosTela() {
         menuSair.addActionListener(new ActionListener() {
             @Override
@@ -116,6 +139,9 @@ public class TelaPrincipal {
         });
     }
 
+    /**
+     * Contrói o Menu Início, trata internacionalização
+     */
     private void construirMenuInicio() {
         menuInicio = new JMenu(I18N.obterMenuInicio());
         menuInicio.setMnemonic(I18N.obterMnemonicoMenuInicio());
@@ -128,7 +154,7 @@ public class TelaPrincipal {
             menuInicio.add(menuCadastrarUsuario);
         } else {
             // Aqui você poderá adicionar outros itens de menu, se necessário.
-
+            
             menuInicio.add(menuLogout);
         }
 
@@ -138,6 +164,9 @@ public class TelaPrincipal {
         menuPrincipal.add(menuInicio);
     }
 
+    /**
+     * Constrói o menu Idioma, trata internacionalização.
+     */
     private void construirMenuIdioma() {
         menuIdioma = new JMenu(I18N.obterMenuIdioma());
         menuIdioma.setMnemonic(I18N.obterMnemonicoMenuIdioma());
@@ -148,6 +177,9 @@ public class TelaPrincipal {
         menuPrincipal.add(menuIdioma);
     }
 
+    /**
+     * Constrói o menu Ajuda, trata internacionalização.
+     */
     private void construirMenuAjuda() {
         menuAjuda = new JMenu(I18N.obterMenuAjuda());
         menuAjuda.setMnemonic(I18N.obterMnemonicoMenuAjuda());
@@ -156,21 +188,27 @@ public class TelaPrincipal {
         menuPrincipal.add(menuAjuda);
     }
 
+    /**
+     * Constrói o menu Usuário, trata internacionalização.
+     */
     private void construirMenuUsuario() {
         menuPrincipal = new JMenuBar();
         construirMenuInicio();
-
+        
         if (sessaoUsuario.estahLogado()) {
-            // Aqui você poderá adicionar outros menus adequados
-            // ao seu projeto que serão exibidos quando o
-            // usuário estiver logado no sistema.
-        }
-
+             // Aqui você poderá adicionar outros menus adequados
+             // ao seu projeto que serão exibidos quando o
+             // usuário estiver logado no sistema.
+         }        
+        
         construirMenuIdioma();
         construirMenuAjuda();
         janela.setJMenuBar(menuPrincipal);
     }
 
+    /**
+     * Constrói a tela.
+     */
     private void construirTela() {
         janela = new JFrame(I18N.obterTituloTelaPrincipal());
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -182,18 +220,28 @@ public class TelaPrincipal {
      */
     private void exibirTela() {
         janela.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         // Permite que apenas o botão de fechar esteja disponível na janela.        
         janela.setUndecorated(true);
         janela.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-        
+
         janela.setVisible(true);
     }
 
+    /**
+     * Método main, inicializa o programa.
+     *
+     * @param args Argumentos passados na execução do programa.
+     */
     public static void main(String[] args) {
         new TelaPrincipal().inicializar();
     }
 
+    /**
+     * Retorna uma referência para a janela
+     *
+     * @return
+     */
     public JFrame obterJanela() {
         return this.janela;
     }
